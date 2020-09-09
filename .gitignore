@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.pyd
+*.onnx
+__pycache__
+.pytest_cache
+private/
+venv/

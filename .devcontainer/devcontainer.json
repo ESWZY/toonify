@@ -1,0 +1,6 @@
+{
+  "name": "Toonfiy",
+  "dockerFile": "../app/Dockerfile",
+  "forwardPorts": [8080, 5000],
+  "extensions": ["ms-python.python"]
+}
