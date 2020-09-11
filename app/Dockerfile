@@ -8,8 +8,11 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-# Install production dependencies.
-RUN pip install Flask gunicorn Pillow google-cloud-storage
+RUN apt-get -y update
+RUN apt-get install -y --fix-missing \
+    build-essential cmake libopenblas-dev liblapack-dev 
+RUN pip install --upgrade pip
+RUN pip install Flask gunicorn Pillow dlib
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.

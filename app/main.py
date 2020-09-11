@@ -4,6 +4,7 @@ from base64 import b64encode
 from flask import Flask, request, render_template
 
 import model
+import face_detection
 
 app = Flask(__name__)
 
@@ -18,7 +19,8 @@ def upload_image():
     if request.method == "POST":
         if request.files:
             image = request.files["image"]
-            image_out = model.run(image)
+            aligned_image = face_detection.run(image)
+            image_out = model.run(aligned_image)
             data = image_out.getvalue()
             data_url = f"data:image/jpg;base64,{b64encode(data).decode()}"
             return render_template("show_image.html", image=data_url)

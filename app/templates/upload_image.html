@@ -1,25 +1,43 @@
 
-<div class="container">
-  <div class="row">
-    <div class="col">
+<!DOCTYPE html>
+<html lang="en">
 
-      <h1>Toonify yourself</h1>
-      <hr>
+  <head>
+    <meta charset="utf-8">
+    <title>Toonify Yourself</title>
+    <meta name="description" content="Toonify Yourself web app">
+    <meta name="author" content="Justin Pinkney">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/script.js"></script>
+  </head>
 
-      <form action="/upload-image" method="POST" enctype="multipart/form-data">
+ <body>
 
-        <div class="form-group">
-          <label>Upload image</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="image" id="image">
-            <label class="custom-file-label" for="image">Select image...</label>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+
+          <h1>Toonify yourself</h1>
+          <hr>
+
+          <form action="/upload-image" method="POST" enctype="multipart/form-data" id="my-form" >
+
+            <div class="form-group">
+              <label>Upload image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" id="image">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">go</button>
+            <div id="lock-modal"></div>
+            <div id="loading-circle"></div>
+
+          </form>
+
         </div>
-
-        <button type="submit" class="btn btn-primary">go</button>
-
-      </form>
-
+      </div>
     </div>
-  </div>
-</div>
+
+  </body>
+</html>
