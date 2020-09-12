@@ -9,8 +9,8 @@ detector = dlib.get_frontal_face_detector()
 shape_predictor = dlib.shape_predictor(MODEL_PATH)
 
 def get_landmarks(image):
-    image_file = PIL.Image.open(image)
-    img = np.array(image_file)
+    """Get landmarks from PIL image"""
+    img = np.array(image)
     detections = detector(img, 1)
 
     for detection in detections:
@@ -21,14 +21,8 @@ def get_landmarks(image):
             print("Exception in get_landmarks()!")
             print(e)
 
-def run(in_path):
-    landmarks = list(get_landmarks(in_path))
-    assert len(landmarks) > 0, "no faces found"
-    if len(landmarks) > 1:
-        print("more than 1 face found, using first")
-    return image_align(in_path, landmarks[0])
 
-def image_align(src_file, face_landmarks, output_size=512, transform_size=2048, enable_padding=True, x_scale=1, y_scale=1, em_scale=0.1, alpha=False):
+def image_align(src_img, face_landmarks, output_size=512, transform_size=2048, enable_padding=True, x_scale=1, y_scale=1, em_scale=0.1, alpha=False):
         # Align function from FFHQ dataset pre-processing step adapted from
         # https://github.com/NVlabs/ffhq-dataset
 
@@ -63,7 +57,7 @@ def image_align(src_file, face_landmarks, output_size=512, transform_size=2048, 
         quad = np.stack([c - x - y, c - x + y, c + x + y, c + x - y])
         qsize = np.hypot(*x) * 2
 
-        img = PIL.Image.open(src_file).convert('RGBA').convert('RGB')
+        img = src_img.convert('RGBA').convert('RGB')
 
         # Shrink.
         shrink = int(np.floor(qsize / output_size * 0.5))

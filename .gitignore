@@ -2,6 +2,7 @@
 *.pyo
 *.pyd
 *.onnx
+*.dat
 __pycache__
 .pytest_cache
 private/

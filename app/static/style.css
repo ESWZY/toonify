@@ -1,3 +1,11 @@
+body {
+  font-family: sans-serif;
+}
+
+img {
+  width:50%;
+  float: left;
+}
 
 #lock-modal {
   display: none;
@@ -8,13 +16,17 @@
   left: 0;
   right: 0;
   bottom: 0;
+  color: white;
   border-radius: inherit;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
 }
 
 #loading-circle {
   display: none;
   position: absolute;
-  top: 0;
+  top: 5em;
   bottom: 0;
   left: 0;
   right: 0;

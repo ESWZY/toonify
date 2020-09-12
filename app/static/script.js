@@ -5,8 +5,8 @@ $(document).ready(function() {
 
 
   form.on('submit', function(e) {
-    lockModal.css("display", "block");
-    loadingCircle.css("display", "block");
+    lockModal.css("display", "flex");
+    loadingCircle.css("display", "flex");
 
   });
 
