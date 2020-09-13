@@ -2,56 +2,119 @@
 <html lang="en">
 
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56611154-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-56611154-4');
+    </script>
+
     <meta charset="utf-8">
     <title>Toonify Yourself</title>
     <meta name="description" content="Toonify Yourself web app">
     <meta name="author" content="Justin Pinkney">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/static/script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
 
  <body>
-
-    <div class="container">
-
-      <div class="header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Toonify Yourself</h1>
-        <p class="lead">something here</p>
-      </div>
-
-      <form action="/upload-image" method="POST" enctype="multipart/form-data" id="my-form" >
-        <div class="form-group">
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" name="image">
-            <label class="custom-file-label" for="customFile">Upload a photo</label>
-          </div>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#toonify">Toonify Yourself</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="#examples">Examples</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+          <a class="nav-link" href="#about">About</a>
         </div>
-        <button type="submit" class="btn btn-primary">Toonify!</button>
-      </form>
-
-        <div id="lock-modal">Running Toonification...</div>
-        <div id="loading-circle"></div>
-
-      </form>
-
-      {% if status is defined and status == "success" %}
-      <div class="results">
-        <img src="{{images[0]}}"> </img>
-        <img src="{{images[1]}}"> </img>
       </div>
-      {% endif %}
+    </nav>
+  </header>
 
-      {% if status is defined and status == "fail" %}
-      <div class="failed">
-        <p>Failed: {{ message }}</p>
-      </div>
-      {% endif %}
-
-
+  <div class="container">
+    <div class="header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 id="toonify" class="display-4">Toonify Yourself</h1>
+      <p class="lead">Upload a photo and see what you'd look like in a animated movie!</p>
     </div>
+
+    <form action="{{ url_for('upload_image') }}" method="POST" enctype="multipart/form-data" id="my-form" >
+      <div class="form-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile" name="image">
+          <label class="custom-file-label" for="customFile">Upload a photo</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Toonify!</button>
+
+      <div id="lock-modal">Running Toonification...</div>
+      <div id="loading-circle"></div>
+    </form>
+
+    {% if status is defined and status == "success" %}
+    <div class="row mt-5">
+      <div class="col"><img src="{{images[0]}}" class="img-fluid" /></div>
+      <div class="col"><img src="{{images[1]}}" class="img-fluid" /></div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  {% if status is defined and status == "fail" %}
+  <div class="container">
+    <div class="alert alert-warning" role="alert">
+      <p>Failed: {{ message }}</p>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if message is defined and message != "" %}
+  <div class="container">
+    <div class="alert alert-info" role="alert">
+      <p>FYI: {{ message }}</p>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <h1 id="examples" class="mt-5">Examples</h1>
+    <p>TODO</p>
+  </div>
+
+  <div class="container">
+    <h1 id="faq" class="mt-5">FAQ</h1>
+    <ul>
+      <li>
+        <h3>How do I get good results?</h3>
+        <p>High resolution, straight on, low noise</p>
+      </li>
+      <li>
+        <h3>My face wasn't found!</h3>
+        <p>We use the open source dlib face detector to find faces.</p>
+     </li>
+     <li>
+      <h3>Where did my glasses go?</h3>
+      <p>Not many characters from animated films where glasses so the model seems to have learnt to mostly remove them</p>
+    </li>
+    </ul>
+
+  </div>
+
+  <div class="container">
+    <h1 id="about" class="mt-5">About</h1>
+    <p>This website was created by <a href="https://www.justinpinkney.com">Justin Pinkney</a> and <a href="https://linktr.ee/Norod78">Doron Adler</a>. It uses deep learning to toonify images of faces. More details coming soon...</p>
+  </div>
 
   </body>
 </html>

@@ -2,9 +2,8 @@ body {
   font-family: sans-serif;
 }
 
-img {
-  width:50%;
-  float: left;
+form {
+  margin-bottom: 2em;
 }
 
 #lock-modal {
@@ -21,6 +20,7 @@ img {
   justify-content: center;
   align-items: center;
   font-size: x-large;
+  z-index: 100;
 }
 
 #loading-circle {
@@ -37,6 +37,7 @@ img {
   border-top: 4px solid #3498db;
   border-radius: 50%;
   animation: spin 0.6s ease-in infinite;
+  z-index: 101;
 }
 
 @keyframes spin {

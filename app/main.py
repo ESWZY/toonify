@@ -46,7 +46,12 @@ def hello_world():
 def upload_image():
     if request.method == "POST":
         if request.files:
-            status, message, display_images = process_image()
+            try:
+                status, message, display_images = process_image()
+            except:
+                status = "fail"
+                message = "Something unexpected happened..."
+                display_images = (None, None)
             return render_template("upload_image.html", 
                             status=status,
                             images=display_images,
