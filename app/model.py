@@ -27,7 +27,10 @@ def run(image_in):
 
     try:
         im = Image.open(image_in)
-        im = ImageOps.exif_transpose(im)
+        try:
+            im = ImageOps.exif_transpose(im)
+        except:
+            print("exif problem, not rotating")
         im = im.convert("RGB")
     except PIL.UnidentifiedImageError as err:
         result["status"] = "fail"
