@@ -23,11 +23,13 @@
     <meta property="og:title"              content="Toonify Yourself" />
     <meta property="og:description"        content="Upload a photo of yourself and see what you would look like as a character in CG animated movie." />
     <meta property="og:locale"             content="en_US" />
-    <meta property="og:image"              content="" />
-    <meta property="twitter:creator"       content="@Buntworthy" />
-    <meta property="twitter:title"         content="Toonify Yourself" />
-    <meta property="twitter:description"   content="Upload a photo of yourself and see what you would look like as a character in CG animated movie." />
-    <meta property="twitter:card"          content="summary_large_image" />
+    <meta property="og:image"              content="https://assets.justinpinkney.com/toonify/images/social.jpg" />
+    <meta name="twitter:creator"           content="@Buntworthy" />
+    <meta name="twitter:title"             content="Toonify Yourself" />
+    <meta name="twitter:description"       content="Upload a photo of yourself and see what you would look like as a character in a CG animated movie." />
+    <meta name="twitter:card"              content="summary_large_image" />
+    <meta name="twitter:image"             content="https://assets.justinpinkney.com/toonify/images/social.jpg" />
+    
     <!--  -->
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,12 +39,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/static/script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  </head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.justinpinkney.com/toonify/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://assets.justinpinkney.com/toonify/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://assets.justinpinkney.com/toonify/favicon-16x16.png">
+    <link rel="manifest" href="https://assets.justinpinkney.com/toonify/site.webmanifest">
+    <link rel="shortcut icon" href="https://assets.justinpinkney.com/toonify/favicon.ico">
+  </head> 
 
  <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#toonify">Toonify Yourself</a>
+      <a class="navbar-brand" href="#toonify">Toonify Yourself!</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,8 +66,8 @@
 
   <div class="container">
     <div class="header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 id="toonify" class="display-4">Toonify Yourself</h1>
-      <p class="lead">Upload a photo and see what you'd look like in a animated movie!</p>
+      <h1 id="toonify" class="display-4">Toonify Yourself!</h1>
+      <p class="lead">Upload a photo and see what you'd look like in an animated movie!</p>
     </div>
 
     <form action="{{ url_for('upload_image') }}" method="POST" enctype="multipart/form-data" id="my-form" >
@@ -106,81 +114,81 @@
     <div class="row justify-content-center">
       <div class="col">
         <div class="row">
-          <a href="static/images/trek_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/trek_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/trek_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/trek_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/105755683-1550853148548gettyimages-109478107_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/105755683-1550853148548gettyimages-109478107_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/105755683-1550853148548gettyimages-109478107_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/105755683-1550853148548gettyimages-109478107_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/7.-Leonardo-DiCaprio_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/7.-Leonardo-DiCaprio_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/7.-Leonardo-DiCaprio_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/7.-Leonardo-DiCaprio_01.jpg" class="img-fluid">
           </a>
         </div>
         <div class="row">
-          <a href="static/images/allen_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/allen_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/allen_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/allen_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/blackactors-02_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/blackactors-02_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/actors-02_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/actors-02_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/will_smith_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/will_smith_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/will_smith_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/will_smith_01.jpg" class="img-fluid">
           </a>
         </div>
         <div  class="collapse" id="moreExamples">
           <div class="row">
-            <a href="static/images/emma-stone-anxiety_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/emma-stone-anxiety_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/emma-stone-anxiety_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/emma-stone-anxiety_01.jpg" class="img-fluid">
             </a>
-            <a href="static/images/hollywoods-top-10-highest-paid-actresses-in-2018_k8qw_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/hollywoods-top-10-highest-paid-actresses-in-2018_k8qw_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/hollywoods-top-10-highest-paid-actresses-in-2018_k8qw_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/hollywoods-top-10-highest-paid-actresses-in-2018_k8qw_01.jpg" class="img-fluid">
             </a>
-            <a href="static/images/image_03.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/image_03.jpg" class="img-fluid">
-            </a>
-          </div>
-          <div class="row">
-            <a href="static/images/janeway_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/janeway_01.jpg" class="img-fluid">
-            </a>
-            <a href="static/images/Johnny-Depp-1024x1024_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/Johnny-Depp-1024x1024_01.jpg" class="img-fluid">
-            </a>
-            <a href="static/images/ken-watanabe_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/ken-watanabe_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/image_03.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/image_03.jpg" class="img-fluid">
             </a>
           </div>
           <div class="row">
-            <a href="static/images/KHI-008374-keanu-reeves-400x600_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/KHI-008374-keanu-reeves-400x600_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/janeway_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/janeway_01.jpg" class="img-fluid">
             </a>
-            <a href="static/images/monkwithbook.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/monkwithbook.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/Johnny-Depp-1024x1024_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/Johnny-Depp-1024x1024_01.jpg" class="img-fluid">
             </a>
-            <a href="static/images/V1__01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/V1__01.jpg" class="img-fluid">
-            </a>
-          </div>
-          <div class="row">
-            <a href="static/images/0_Chadwick-Boseman_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/0_Chadwick-Boseman_01.jpg" class="img-fluid">
-            </a>
-            <a href="static/images/unnamed_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/unnamed_01.jpg" class="img-fluid">
-            </a>
-            <a href="static/images/ryan-gosling_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-              <img src="static/images/thumbs/ryan-gosling_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/ken-watanabe_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/ken-watanabe_01.jpg" class="img-fluid">
             </a>
           </div>
           <div class="row">
-          <a href="static/images/vllkyt5r43p1p4tk7_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/vllkyt5r43p1p4tk7_01.jpg" class="img-fluid">
+            <a href="https://assets.justinpinkney.com/toonify/images/KHI-008374-keanu-reeves-400x600_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/KHI-008374-keanu-reeves-400x600_01.jpg" class="img-fluid">
+            </a>
+            <a href="https://assets.justinpinkney.com/toonify/images/monkwithbook.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/monkwithbook.jpg" class="img-fluid">
+            </a>
+            <a href="https://assets.justinpinkney.com/toonify/images/V1__01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/V1__01.jpg" class="img-fluid">
+            </a>
+          </div>
+          <div class="row">
+            <a href="https://assets.justinpinkney.com/toonify/images/0_Chadwick-Boseman_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/0_Chadwick-Boseman_01.jpg" class="img-fluid">
+            </a>
+            <a href="https://assets.justinpinkney.com/toonify/images/unnamed_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/unnamed_01.jpg" class="img-fluid">
+            </a>
+            <a href="https://assets.justinpinkney.com/toonify/images/ryan-gosling_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+              <img src="https://assets.justinpinkney.com/toonify/images/thumbs/ryan-gosling_01.jpg" class="img-fluid">
+            </a>
+          </div>
+          <div class="row">
+          <a href="https://assets.justinpinkney.com/toonify/images/vllkyt5r43p1p4tk7_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/vllkyt5r43p1p4tk7_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/yeoh_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/yeoh_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/yeoh_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/yeoh_01.jpg" class="img-fluid">
           </a>
-          <a href="static/images/deniro_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-            <img src="static/images/thumbs/deniro_01.jpg" class="img-fluid">
+          <a href="https://assets.justinpinkney.com/toonify/images/deniro_01.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+            <img src="https://assets.justinpinkney.com/toonify/images/thumbs/deniro_01.jpg" class="img-fluid">
           </a>
           </div>
         </div>
@@ -215,7 +223,7 @@
       </li>
       <li>
         <h4>Where did my glasses go?</h4>
-        <p>Not many characters from animated films where glasses so the model seems to have learnt to mostly remove them</p>
+        <p>Not many characters from animated films wear glasses so the model seems to have learnt to mostly remove them.</p>
       </li>
     </ul>
 

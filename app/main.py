@@ -1,9 +1,9 @@
 import os
 from base64 import b64encode
+from io import BytesIO
 
 from flask import Flask, request, render_template
 
-from io import BytesIO
 import model
 import face_detection
 
@@ -25,7 +25,7 @@ def process_image():
     filename = image.filename
     if filename != '':
         file_ext = os.path.splitext(filename)[1]
-        if file_ext not in [".jpg", ".jpeg", ".png", ".bmp"]:
+        if file_ext.lower() not in [".jpg", ".jpeg", ".png", ".bmp"]:
             return "fail", "Not a valid file type", (None, None)
 
     result = model.run(image)
@@ -48,10 +48,13 @@ def upload_image():
         if request.files:
             try:
                 status, message, display_images = process_image()
-            except:
+            except Exception as e:
                 status = "fail"
                 message = "Something unexpected happened..."
                 display_images = (None, None)
+                print(e)
+            
+            print(message)
             return render_template("upload_image.html", 
                             status=status,
                             images=display_images,

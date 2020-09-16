@@ -24,6 +24,16 @@ def test_face_detection_multi_face():
     assert isinstance(result["toonified_image"], Image.Image)
     assert result["message"] == model.message["MULTIPLE_FACES"]
 
+def test_face_detection_transparent():
+    """Working face detection on transparent image"""
+    image_in = "test_data/face-alpha.png"
+    result = model.run(image_in)
+
+    assert result["status"] == "success"
+    assert isinstance(result["aligned_image"], Image.Image)
+    assert isinstance(result["toonified_image"], Image.Image)
+    assert result["message"] == ""
+
 # Failures
 
 def test_face_detection_no_face():

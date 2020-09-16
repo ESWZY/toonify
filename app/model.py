@@ -27,6 +27,7 @@ def run(image_in):
 
     try:
         im = Image.open(image_in)
+        im = im.convert("RGB")
     except PIL.UnidentifiedImageError as err:
         result["status"] = "fail"
         result["message"] = message["BAD_IMAGE"]

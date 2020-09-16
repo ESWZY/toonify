@@ -1,0 +1,18 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['gsutil', 'cp', 'gs://toonify_models/doron-v3-40.onnx', 'model.onnx']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['gsutil', 'cp', 'gs://toonify_models/shape_predictor_68_face_landmarks.dat', 'shape_predictor_68_face_landmarks.dat']
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker pull gcr.io/toonify/hellotoon:latest || exit 0']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 
+            'build', 
+            '-t', 'gcr.io/toonify/hellotoon:latest', 
+            '--cache-from', 'gcr.io/toonify/hellotoon:latest',
+            '.' ,
+        ]
+images:
+- 'gcr.io/toonify/hellotoon:latest'
+    
