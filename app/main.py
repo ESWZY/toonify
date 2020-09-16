@@ -12,7 +12,7 @@ app = Flask(__name__)
 def url_encode_image(image, im_format="jpeg"):
     """Encode PIL image as url"""
     file_output = BytesIO()
-    image.save(file_output, format=im_format)
+    image.save(file_output, format=im_format, quality=90)
     data = file_output.getvalue()
     data_url = f"data:image/{im_format};base64,{b64encode(data).decode()}"
     return data_url

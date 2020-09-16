@@ -1,7 +1,7 @@
 import numpy as np
 import onnxruntime as rt
 import PIL
-from PIL import Image
+from PIL import Image, ImageOps
 from pathlib import Path
 import face_detection
 
@@ -27,6 +27,7 @@ def run(image_in):
 
     try:
         im = Image.open(image_in)
+        im = ImageOps.exif_transpose(im)
         im = im.convert("RGB")
     except PIL.UnidentifiedImageError as err:
         result["status"] = "fail"

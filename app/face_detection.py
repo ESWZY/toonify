@@ -2,7 +2,7 @@ import dlib
 import numpy as np
 import os
 import PIL.Image
-
+from PIL import ImageOps
 
 MODEL_PATH = "shape_predictor_68_face_landmarks.dat"
 detector = dlib.get_frontal_face_detector()
@@ -10,9 +10,10 @@ shape_predictor = dlib.shape_predictor(MODEL_PATH)
 
 def get_landmarks(image):
     """Get landmarks from PIL image"""
+
     img = np.array(image)
     detections = detector(img, 1)
-
+    
     for detection in detections:
         try:
             face_landmarks = [(item.x, item.y) for item in shape_predictor(img, detection).parts()]

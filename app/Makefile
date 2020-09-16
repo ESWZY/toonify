@@ -1,4 +1,4 @@
-sumbit :
+submit :
 	gcloud builds submit --config cloudbuild.yml
 	
 deploy :
