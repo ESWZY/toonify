@@ -68,6 +68,14 @@
     <div class="header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 id="toonify" class="display-4">Toonify Yourself!</h1>
       <p class="lead">Upload a photo and see what you'd look like in an animated movie!</p>
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+        class="twitter-share-button" 
+        data-size="large" 
+        data-text="Toonify Yourself! Upload a photo and see what you&#39;d look like in an animated movie!" 
+        data-url="https://toonify.justinpinkney.com/" 
+        data-hashtags="toonify" 
+        data-dnt="true" 
+        data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
     <form action="{{ url_for('upload_image') }}" method="POST" enctype="multipart/form-data" id="my-form" >
@@ -84,7 +92,7 @@
     </form>
 
     {% if status is defined and status == "success" %}
-    <div class="row mt-5">
+    <div class="row mt-5 mx-auto">
       <div class="col"><img src="{{images[0]}}" class="img-fluid" /></div>
       <div class="col"><img src="{{images[1]}}" class="img-fluid" /></div>
     </div>
@@ -107,6 +115,21 @@
     </div>
   </div>
   {% endif %}
+
+  <div class="container">
+    <div class="alert alert-info mt-5" role="alert">
+      <h4 class="mb-4">Toonify Yourself is kindly supported by:</h4>
+      <ul>
+        <li>
+          <p class="font-weight-bold"><a href="https://deepai.org">DeepAI</a>: an <a href="https://deepai.org/machine-learning-glossary-and-terms/artificial-intelligence">artificial intelligence</a> company accelerating the world's transition to A.I</p>
+        </li>
+        <li>
+          <p class="font-weight-bold">Our generous supporters on Ko-fi. If you'd like to become one of them click here: 
+            <a href='https://ko-fi.com/W7W228W2S' target='_blank'><img style='border:0px;' src='https://www.ko-fi.com/img/githubbutton_sm.svg' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></p> 
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <div class="container">
     <h1 id="examples" class="mt-5">Examples</h1>
@@ -206,8 +229,13 @@
       <li>
         <h4>How does this work?</h4>
         <p>This toonification system is made using deep learning. It's based on distillation of a blended StyleGAN models into a pix2pixHD image to image translation network.</p>
-        <p>If none of that made any sense take a look at <a href="https://www.justinpinkney.com/toonify-yourself/">this blog post on self toonification</a> which explains some of the details.</p>
-        <p>More technical details will follow soon.</p>
+        <p>For information on all the technical details of how this works, see my blog post <a href="https://www.justinpinkney.com/making-toonify/">Making Toonify</a>.</p>
+      </li>
+      <li>
+        <h4>How are you paying for this? Wasn't it costing too much?</h4>
+        <p>We are now generously supported by <a href="https://deepai.org/">DeepAI</a> who are running the neural network backend for us. 
+          Although DeepAI are now doing most of the heavy lifting, there is still a bit of cost in running the site, 
+          and we're very grateful for those who have supported us on <a href="https://ko-fi.com/justinpinkney">Ko-fi</a>.</p>
       </li>
       <li>
         <h4>How do I get good results?</h4>
@@ -215,15 +243,29 @@
       </li>
       <li>
         <h4>Do you store my photo?</h4>
-        <p>We don't store any of the images uploaded or generated. Once the toonification has finished running no images are kept on our systems.</p>
+        <p>We don't store any of the images uploaded or generated. 
+          We directly send the image to the <a href="https://deepai.org/machine-learning-model/toonify">Toonify model running on DeepAI</a> and then show you the results. 
+          No imagery is kept on our systems.</p>
       </li>
       <li>
         <h4>My face wasn't found!</h4>
-        <p>We use the open source dlib face detector to find faces, it's designed to pick up frontal faces but isn't perfect.</p>
+        <p>We use the open source <a href="http://dlib.net/">dlib</a> face detector to find faces, it's designed to pick up frontal faces but isn't perfect.</p>
       </li>
       <li>
         <h4>Where did my glasses go?</h4>
         <p>Not many characters from animated films wear glasses so the model seems to have learnt to mostly remove them.</p>
+      </li>
+      <li>
+        <h4>How did you come up with this idea?</h4>
+        <p>This all started from some earlier experiments <a href="https://twitter.com/Norod78/status/1297849293299212288">Doron shared on Twitter</a> that got a lot of interest. 
+          For a description of those early experiments see <a href="https://www.justinpinkney.com/toonify-yourself/">this blog post on self toonification</a>, 
+          the idea is the same, but the method is different (and not really suitable for hosting as a webapp).
+        <p>Going even futher back in time, this was all based on some <a href="https://www.justinpinkney.com/stylegan-network-blending/">new methods of mixing StyleGAN models</a> I came up with trying to make realistic Ukiyo-e portraits</p>
+      </li>
+      <li>
+        <h4>Can I use this model for my own project?</h4>
+        <p><a href="https://deepai.org/">DeepAI</a> provide <a href="https://deepai.org/machine-learning-model/toonify">an API that you can use</a> to integrate this into your own project. 
+        It's what we're using to run this site!</p>
       </li>
     </ul>
 
@@ -231,7 +273,10 @@
 
   <div class="container">
     <h1 id="about" class="mt-5">About</h1>
-    <p>This website was created by <a href="https://www.justinpinkney.com">Justin Pinkney</a> and <a href="https://linktr.ee/Norod78">Doron Adler</a>. It uses deep learning to toonify images of faces. More details coming soon...</p>
+    <p>This website was created by <a href="https://www.justinpinkney.com">Justin Pinkney</a> and <a href="https://linktr.ee/Norod78">Doron Adler</a>. 
+      It uses deep learning to toonify images of faces. 
+      If you want to learn more about how this was trained, built, and deployed, the best place to look is my blog: <a href="https://www.justinpinkney.com">www.justinpinkney.com</a>
+    </p>
     <p>If you want to get in touch try us on Twitter: <a href="https://twitter.com/Buntworthy">@Buntworthy</a> and <a href="https://twitter.com/Norod78">@Norod78</a>.</p>
   </div>
 

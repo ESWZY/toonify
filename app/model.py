@@ -1,19 +1,27 @@
 import numpy as np
-import onnxruntime as rt
 import PIL
 from PIL import Image, ImageOps
 from pathlib import Path
 import face_detection
+import requests
 
-MODEL_FILE = "model.onnx"
-session = rt.InferenceSession(MODEL_FILE)
-input_name = session.get_inputs()[0].name
-output_name = session.get_outputs()[0].name
+from io import BytesIO
+
+from dotenv import load_dotenv
+load_dotenv()
+import os
+
+import main
+
+api_key = os.getenv("DEEP_AI_KEY")
+TIMEOUT = 30
+API_URL = "https://api.deepai.org/api/toonify"
 
 message = {
             "NO_FACES": "Didn't find any faces in the supplied image.",
             "MULTIPLE_FACES": "Found more than one face, processing just the first.",
-            "BAD_IMAGE": "Image file could not be opened",
+            "BAD_IMAGE": "Image file could not be opened.",
+            "API_FAIL": "Problem talking to the DeepAI backend."
           }
 
 def run(image_in):
@@ -45,7 +53,13 @@ def run(image_in):
         result["message"] = message["MULTIPLE_FACES"]
 
     if result["aligned_image"]:
-        result["toonified_image"] = toonify(result["aligned_image"])
+        try:
+            result["toonified_image"] = toonify(result["aligned_image"])
+        except Exception as e:
+            main.log("ERROR", "problem during request")
+            main.log("ERROR", str(e))
+            result["status"] = "fail"
+            result["message"] = message["API_FAIL"]
     
     return result
 
@@ -63,16 +77,23 @@ def align(image_in):
 def toonify(image_in):
     im = image_in
     im = im.resize((512, 512))
-    im_array = np.array(im, np.float32)
-    im_array = (im_array/255)*2 - 1
-    im_array = np.transpose(im_array, (2, 0, 1))
-    im_array = np.expand_dims(im_array, 0)
 
-    print("starting inference...")
-    pred = session.run([output_name], {input_name: im_array})[0]
-    print("finished!")
+    file_output = BytesIO()
+    im.save(file_output, format="jpeg", quality=90)
+    data = file_output.getvalue()
+    
+    main.log("DEBUG", "Sending request...")
+    r = requests.post(
+        API_URL,
+        data={'align_face': "False"},
+        files={'image': data},
+        headers={'api-key': api_key},
+        timeout=TIMEOUT,
+    )
+    r.raise_for_status()
+    result = r.json()
+    main.log("DEBUG", "Finished request")
+        
+    return result["output_url"]
+    
 
-    pred = np.squeeze(255*(pred + 1)/2)
-    pred = np.transpose(pred, (1, 2, 0))
-
-    return Image.fromarray(pred.astype(np.uint8))

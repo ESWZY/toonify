@@ -4,23 +4,32 @@ import os
 import PIL.Image
 from PIL import ImageOps
 
-MODEL_PATH = "shape_predictor_68_face_landmarks.dat"
+import main
+
+MODEL_PATH = "shape_predictor_5_face_landmarks.dat"
 detector = dlib.get_frontal_face_detector()
 shape_predictor = dlib.shape_predictor(MODEL_PATH)
 
 def get_landmarks(image):
     """Get landmarks from PIL image"""
 
-    img = np.array(image)
-    detections = detector(img, 1)
+    max_size = max(image.size)
+    reduction_scale = int(max_size/512)
+    if reduction_scale == 0:
+        reduction_scale = 1
+    downscaled = image.reduce(reduction_scale)
+    img = np.array(downscaled)
+    main.log("DEBUG", "starting detection")
+    detections = detector(img, 0)
+    main.log("DEBUG", f"found {len(detections)} faces")
     
     for detection in detections:
         try:
-            face_landmarks = [(item.x, item.y) for item in shape_predictor(img, detection).parts()]
+            face_landmarks = [(reduction_scale*item.x, reduction_scale*item.y) for item in shape_predictor(img, detection).parts()]
             yield face_landmarks
         except Exception as e:
-            print("Exception in get_landmarks()!")
-            print(e)
+            main.log("DEBUG", "Exception in get_landmarks")
+            main.log("WARNING", str(e))
 
 
 def image_align(src_img, face_landmarks, output_size=512, transform_size=2048, enable_padding=True, x_scale=1, y_scale=1, em_scale=0.1, alpha=False):
@@ -28,28 +37,19 @@ def image_align(src_img, face_landmarks, output_size=512, transform_size=2048, e
         # https://github.com/NVlabs/ffhq-dataset
 
         lm = np.array(face_landmarks)
-        lm_chin          = lm[0  : 17]  # left-right
-        lm_eyebrow_left  = lm[17 : 22]  # left-right
-        lm_eyebrow_right = lm[22 : 27]  # left-right
-        lm_nose          = lm[27 : 31]  # top-down
-        lm_nostrils      = lm[31 : 36]  # top-down
-        lm_eye_left      = lm[36 : 42]  # left-clockwise
-        lm_eye_right     = lm[42 : 48]  # left-clockwise
-        lm_mouth_outer   = lm[48 : 60]  # left-clockwise
-        lm_mouth_inner   = lm[60 : 68]  # left-clockwise
+        lm_eye_left      = lm[2:3]  # left-clockwise
+        lm_eye_right     = lm[0:1]  # left-clockwise
 
         # Calculate auxiliary vectors.
         eye_left     = np.mean(lm_eye_left, axis=0)
         eye_right    = np.mean(lm_eye_right, axis=0)
         eye_avg      = (eye_left + eye_right) * 0.5
-        eye_to_eye   = eye_right - eye_left
-        mouth_left   = lm_mouth_outer[0]
-        mouth_right  = lm_mouth_outer[6]
-        mouth_avg    = (mouth_left + mouth_right) * 0.5
-        eye_to_mouth = mouth_avg - eye_avg
+        eye_to_eye   = 0.71*(eye_right - eye_left)
+        mouth_avg    = lm[4]
+        eye_to_mouth = 1.35*(mouth_avg - eye_avg)
 
         # Choose oriented crop rectangle.
-        x = eye_to_eye - np.flipud(eye_to_mouth) * [-1, 1]
+        x = eye_to_eye.copy()
         x /= np.hypot(*x)
         x *= max(np.hypot(*eye_to_eye) * 2.0, np.hypot(*eye_to_mouth) * 1.8)
         x *= x_scale
