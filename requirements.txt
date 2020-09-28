@@ -1,3 +1,8 @@
 Flask
 onnxruntime
 Pillow
+numpy
+Pillow
+dlib
+requests
+python-dotenv
