@@ -15,6 +15,9 @@ import os
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # upload limit
 app.config['SECRET_KEY'] = os.getenv("FLASK_SECRET")
+app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv("RECAPTCHA_PUBLIC_KEY")
+app.config['RECAPTCHA_PRIVATE_KEY'] = os.getenv("RECAPTCHA_PRIVATE_KEY")
+app.config['WTF_CSRF_ENABLED'] = False # CSRF doesn't work for cloud run
 
 PROJECT = 'toonify';
 

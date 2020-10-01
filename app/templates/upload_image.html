@@ -49,6 +49,11 @@
   </head> 
 
  <body>
+  <script>
+      function onSubmitCallback(token) {
+          document.getElementById("my-form").submit();
+      }
+  </script>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#toonify">Toonify Yourself!</a>
@@ -104,12 +109,16 @@
           {{ form.hidden_tag() }}
           {{ form.image(class="custom-file-input") }}
           {{ form.image.label(class="custom-file-label") }}
+          {{ form.recaptcha }}
           {% for error in form.image.errors %}
+              <span style="color: red;">{{ error }}</span>
+          {% endfor %}
+          {% for error in form.recaptcha.errors %}
               <span style="color: red;">{{ error }}</span>
           {% endfor %}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Toonify!</button>
+      <button id="recaptcha-submit" type="submit" class="btn btn-primary">Toonify!</button>
 
       <div id="lock-modal">Running Toonification...</div>
       <div id="loading-circle"></div>
