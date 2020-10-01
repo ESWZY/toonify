@@ -7,9 +7,14 @@ from flask import Flask, request, render_template
 
 import model
 import face_detection
+from forms import ImageForm
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # upload limit
+app.config['SECRET_KEY'] = os.getenv("FLASK_SECRET")
 
 PROJECT = 'toonify';
 
@@ -70,8 +75,9 @@ def hello_world():
 
 @app.route("/", methods=["GET", "POST"])
 def upload_image():
+    form = ImageForm()
     if request.method == "POST":
-        if request.files:
+        if form.validate_on_submit():
             try:
                 status, message, display_images = process_image()
             except Exception as e:
@@ -86,9 +92,10 @@ def upload_image():
             return render_template("upload_image.html", 
                             status=status,
                             images=display_images,
-                            message=message)
+                            message=message,
+                            form=form)
     
-    return render_template("upload_image.html")
+    return render_template("upload_image.html", form=form)
 
 
 if __name__ == "__main__":

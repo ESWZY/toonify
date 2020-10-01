@@ -7,7 +7,7 @@ RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
     build-essential cmake libopenblas-dev liblapack-dev 
 RUN pip install --upgrade pip
-RUN pip install Flask gunicorn Pillow dlib numpy requests python-dotenv gevent
+RUN pip install Flask gunicorn Pillow dlib numpy requests python-dotenv gevent flask-wtf
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME

@@ -1,6 +1,5 @@
 Flask
 onnxruntime
-Pillow
 numpy
 Pillow
 dlib

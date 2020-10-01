@@ -69,21 +69,44 @@
     <div class="header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 id="toonify" class="display-4">Toonify Yourself!</h1>
       <p class="lead">Upload a photo and see what you'd look like in an animated movie!</p>
-      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
-        class="twitter-share-button" 
-        data-size="large" 
-        data-text="Toonify Yourself! Upload a photo and see what you&#39;d look like in an animated movie!" 
-        data-url="https://toonify.justinpinkney.com/" 
-        data-hashtags="toonify" 
-        data-dnt="true" 
-        data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <div class="row justify-content-center">
+        <div class="px-2">
+          <a href="https://www.producthunt.com/posts/toonify?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-toonify" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=268787&theme=light" alt="Toonify - Cartoonify your selfies | Product Hunt" style="width: 130px; height: 28px;" width="130px" height="28px" /></a>
+        </div>
+        <div class="px-2">
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+            class="twitter-share-button" 
+            data-size="large" 
+            data-text="Toonify Yourself! Upload a photo and see what you&#39;d look like in an animated movie!" 
+            data-url="https://toonify.justinpinkney.com/" 
+            data-hashtags="toonify" 
+            data-dnt="true" 
+            data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        <div class="px-2">
+          <a href="https://ko-fi.com/W7W228W2S">
+            <img src="https://www.ko-fi.com/img/githubbutton_sm.svg" height="28px" />
+          </a>
+        </div>
+        <div class="px-2">
+          <a href="https://github.com/justinpinkney/toonify">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMiAwIDUuMzAyIDMuNDM4IDkuOCA4LjIwNyAxMS4zODcuNTk5LjExMS43OTMtLjI2MS43OTMtLjU3N3YtMi4yMzRjLTMuMzM4LjcyNi00LjAzMy0xLjQxNi00LjAzMy0xLjQxNi0uNTQ2LTEuMzg3LTEuMzMzLTEuNzU2LTEuMzMzLTEuNzU2LTEuMDg5LS43NDUuMDgzLS43MjkuMDgzLS43MjkgMS4yMDUuMDg0IDEuODM5IDEuMjM3IDEuODM5IDEuMjM3IDEuMDcgMS44MzQgMi44MDcgMS4zMDQgMy40OTIuOTk3LjEwNy0uNzc1LjQxOC0xLjMwNS43NjItMS42MDQtMi42NjUtLjMwNS01LjQ2Ny0xLjMzNC01LjQ2Ny01LjkzMSAwLTEuMzExLjQ2OS0yLjM4MSAxLjIzNi0zLjIyMS0uMTI0LS4zMDMtLjUzNS0xLjUyNC4xMTctMy4xNzYgMCAwIDEuMDA4LS4zMjIgMy4zMDEgMS4yMy45NTctLjI2NiAxLjk4My0uMzk5IDMuMDAzLS40MDQgMS4wMi4wMDUgMi4wNDcuMTM4IDMuMDA2LjQwNCAyLjI5MS0xLjU1MiAzLjI5Ny0xLjIzIDMuMjk3LTEuMjMuNjUzIDEuNjUzLjI0MiAyLjg3NC4xMTggMy4xNzYuNzcuODQgMS4yMzUgMS45MTEgMS4yMzUgMy4yMjEgMCA0LjYwOS0yLjgwNyA1LjYyNC01LjQ3OSA1LjkyMS40My4zNzIuODIzIDEuMTAyLjgyMyAyLjIyMnYzLjI5M2MwIC4zMTkuMTkyLjY5NC44MDEuNTc2IDQuNzY1LTEuNTg5IDguMTk5LTYuMDg2IDguMTk5LTExLjM4NiAwLTYuNjI3LTUuMzczLTEyLTEyLTEyeiIvPjwvc3ZnPg==" height="28px">
+          </a>
+        </div>
+    </div>
     </div>
 
     <form action="{{ url_for('upload_image') }}" method="POST" enctype="multipart/form-data" id="my-form" >
       <div class="form-group">
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="customFile" name="image">
-          <label class="custom-file-label" for="customFile">Upload a photo</label>
+          <!-- <input type="file" class="custom-file-input" id="customFile" name="image">
+          <label class="custom-file-label" for="customFile">Upload a photo</label> -->
+          {{ form.hidden_tag() }}
+          {{ form.image(class="custom-file-input") }}
+          {{ form.image.label(class="custom-file-label") }}
+          {% for error in form.image.errors %}
+              <span style="color: red;">{{ error }}</span>
+          {% endfor %}
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Toonify!</button>
