@@ -3,7 +3,7 @@ from base64 import b64encode
 from io import BytesIO
 import json
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 
 import model
 import face_detection
@@ -19,7 +19,8 @@ app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv("RECAPTCHA_PUBLIC_KEY")
 app.config['RECAPTCHA_PRIVATE_KEY'] = os.getenv("RECAPTCHA_PRIVATE_KEY")
 app.config['WTF_CSRF_ENABLED'] = False # CSRF doesn't work for cloud run
 
-PROJECT = 'toonify';
+PROJECT = 'toonify'
+DONATED_URL = "olgyoboetrgtmg"
 
 def log(level, message):
     # Build structured log messages as an object.
@@ -76,12 +77,36 @@ def process_image():
 def hello_world():
     return "awake!"
 
+@app.route("/" + DONATED_URL, methods=["GET"])
+def donated():
+    session[DONATED_URL] = True
+    return "thanks!"
+
+def update_nag():
+    if "count" in session:
+        session["count"] += 1
+    else:
+        session["count"] = 1
+    
+    if DONATED_URL in session:
+        nag = False
+    elif session["count"] >= 3:
+        nag = True
+        session["count"] = 0
+    else:
+        nag = False
+    
+    return nag
+
 @app.route("/", methods=["GET", "POST"])
 def upload_image():
     form = ImageForm()
+
     if request.method == "POST":
         if form.validate_on_submit():
             try:
+                nag = update_nag()
+
                 status, message, display_images = process_image()
             except Exception as e:
                 status = "fail"
@@ -96,7 +121,8 @@ def upload_image():
                             status=status,
                             images=display_images,
                             message=message,
-                            form=form)
+                            form=form,
+                            nag=nag)
     
     return render_template("upload_image.html", form=form)
 

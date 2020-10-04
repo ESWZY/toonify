@@ -49,6 +49,50 @@
   </head> 
 
  <body>
+
+  {% if nag %}
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Looks like you're enjoying Toonify Yourself!</h5>
+        </div>
+        
+        <div class="modal-body">
+          <p>Please donate on Ko-fi by clicking the button below to keep this site running for everyone!</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" 
+            onclick="window.open('https://ko-fi.com/W7W228W2S', '_blank');" 
+            id="donate" 
+            class="btn btn-primary" 
+            target="_blank" 
+            data-dismiss="modal">Donate on Ko-fi!</a>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <script>
+      $(document).ready(function() { // When page finished loading
+        if ( $('.modal-content').length ) { // if there is an DOM that has class has-error
+          $('#exampleModal').modal('show'); // Show Modal
+        }
+      });
+
+      $(function(){
+        $('#donate').on('click', function(e){
+            $.ajax({
+                url: '/olgyoboetrgtmg',
+                type: 'GET'
+            });
+        });
+    });
+  </script>
+
   <script>
       function onSubmitCallback(token) {
           document.getElementById("my-form").submit();
@@ -109,11 +153,7 @@
           {{ form.hidden_tag() }}
           {{ form.image(class="custom-file-input") }}
           {{ form.image.label(class="custom-file-label") }}
-          {{ form.recaptcha }}
           {% for error in form.image.errors %}
-              <span style="color: red;">{{ error }}</span>
-          {% endfor %}
-          {% for error in form.recaptcha.errors %}
               <span style="color: red;">{{ error }}</span>
           {% endfor %}
         </div>
